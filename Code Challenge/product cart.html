@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Catalog</title>
+</head>
+<body>
+
+<div class="product" data-id="1" data-price="100">
+  <h3>SAMSUNG</h3>
+  <p>Price: $100</p>
+  <button onclick="addToCart(1)">Add to Cart</button>
+</div>
+
+<div class="product" data-id="2" data-price="200">
+  <h3>VIVO</h3>
+  <p>Price: $200</p>
+  <button onclick="addToCart(2)">Add to Cart</button>
+</div>
+
+<script>
+function addToCart(productId) 
+{
+  const product = document.querySelector(`[data-id="${productId}"]`);
+  const productName = product.querySelector('h3').textContent;
+  const productPrice = product.dataset.price;
+  alert(`Product "${productName}" added to cart. Price: "${productPrice}"`);
+}
+</script>
+
+</body>
+</html>
