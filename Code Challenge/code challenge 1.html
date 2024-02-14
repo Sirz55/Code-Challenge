@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Consonant Count</h2>
+    <label for="inputText">Enter a word or sentence:</label>
+    <input type="text" id="inputText"><br>
+
+    <button id="countButton">Count Consonants</button>
+    <script>
+        document.getElementById("countButton").addEventListener("click", () => {
+            let inputText = document.getElementById("inputText").value.toLowerCase();
+            let consonants = inputText.match(/[bcdghikljm]/g);
+            
+            if (!consonants || consonants.length === 0) 
+            {
+                alert("No Consonants");
+            } 
+            else 
+            {
+                alert(`Number of consonants: ${consonants.length}`);
+            }
+        }
+        )
+        ;
+    </script>
+</body>
+</html>

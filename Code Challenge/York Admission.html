@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>York Admission</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>York Admission</h3>
+    <form onsubmit="return display()">
+        <table>
+            <tr>
+                <td><label for="sname">Enter the student name:</label></td>
+                <td><input type="text" id="sname" pattern="[A-Za-z ]+" required></td>
+            </tr>
+            <tr>
+                <td><label for="phno">Enter the phone number:</label></td>
+                <td><input type="tel" id="phone" pattern="[789][0-9]{9}" required></td>
+            </tr>
+            <tr>
+                <td><label for="ai id">Enter the admission id:</label></td>
+                <td><input type="number" id="aid" required></td>
+            </tr>
+            <tr>
+                <td><label for="admissiondate">Date of Admission:</label></td>
+                <td><input type="date" id="admission date" required></td>
+            </tr>
+            <tr>
+                <td><label for="deptname">Department Name:</label></td>
+                <td> 
+                    <td>
+                        <select id="deptname" required>
+                            <option value="" disabled selected>Select Department..</option>
+                            <option value="EEE">EEE</option>
+                            <option value="ECE">ECE</option>
+                            <option value="CSE">CSE</option>
+                            <option value="MECH">MECH</option>
+                            <option value="CIVIL">CIVIL</option>
+                            <option value="IT">IT</option>
+                        </select>
+                        <tr>
+                            <td colspan="2"><input type="checkbox" id="firstGraduate"><label for="firstGraduate">Click if you are first graduate</label></td>
+                        </tr>
+                         <br>
+                        <tr>
+                            <td colspan="2"><center><input type="submit" id="submit"  value="CONFIRM ADMISSION"></center></td>
+                        </tr>
+                    </table>
+                </table>
+    </form>
+    <div id="result"></div>
+    <script>
+    function display() 
+    {
+            var studentName = document.getElementById('sname').value;
+            var admissionFee = 0;
+            var tuitionFee = 0;
+            var hostelFee = 0;
+
+            var department = document.getElementById('deptname').value;
+            var preferHostel = document.querySelector('input[name="preferHostel"]:checked').value;
+            var firstGraduate = document.getElementById('firstGraduate').checked;
+            switch (department) 
+            {
+                case "EEE":
+                case "ECE":
+                case "CSE":
+                case "MECH":
+                case "CIVIL":
+                case "IT":
+                    admissionFee = 30000;
+                    tuitionFee = 45000;
+                    hostelFee = (preferHostel === 'yes') ? 75000 : 0;
+                    break;
+                    default:
+                    break;
+            }
+        </body>
+</html>
