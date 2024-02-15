@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adi Electronics - Online Shopping</title>
+    <link rel="stylesheet" href="style adi.css">
+</head>
+<body onload="disableSubmit()">
+    <h1 id="heading">Welcome to Adi - Online Shopping</h1>
+    <form onsubmit="return calculateFinalAmount()">
+      <table class="center" id="Ebill" style=width:45%;>
+      <tr>
+        <td>Customer Name</td>
+        <td><input type="text" id="custname" placeholder="Enter Customer Name" required pattern="[A-Za-z ]+" title="Only alphabets and spaces allowed"></td>
+      </tr>
+      <tr>
+        <td>Mobile Number</td>
+        <td><input type="tel" id="mobileNumber" placeholder="Enter your mobile no" pattern="[7-9][0-9]{9}" required></td>
+      </tr>
+      <tr>
+          <td>Email ID</td>
+    <td><input type="email" id="email" placeholder="Enter Your Email" required></td>
+  </tr>
+  <tr>
+    <td>Billing Address</td>
+    <td><textarea id="address" rows="5" cols="20" placeholder="Enter Your Address" required></textarea></td>
+  </tr>
+  <tr>
+    <td>Choose Product</td>
+    <td>
+      <select id="product" onchange="calculateBagTotal()" required>
+        <option value="TV">TV</option>
+        <option value="Refrigerator">Refrigerator</option>
+        <option value="Mobile">Mobile</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>Enter Quantity</td>
+    <td><input type="number" id="quantity" placeholder="Enter Quantity" min="1" onchange="calculateBagTotal()" required></td>
+  </tr>
+  <tr>
+    <td>Payment Mode</td>
+    <td>
+      <select id="mode" onchange="calculateBagTotal()" required>
+        <option value='1'>Cash On Delivery</option>
+        <option value='2'>Debit Card</option>
+        <option value='3'>UPI Transfer</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>Bag Total</td>
+    <td><input type="number" id="bill" readonly required></td>
+  </tr>
+  <tr>
+    <td>Coupon Code</td>
+    <td><input type="text" id="coupon" readonly required></td>
+  </tr>
+  <tr>
+    <td>Delivery Options</td>
+    <td>
+      <input type="radio" id="express" name="delivery" value="Express" onchange="calculateFinalAmount()" required>
+      <label for="express">Express</label>
+      <input type="radio" id="standard" name="delivery" value="Standard" onchange="calculateFinalAmount()" required>
+      <label for="standard">Standard</label>
+    </td>
+  </tr>
+  <tr>
+      <td rowspan="1"><input type="checkbox" id="terms" onchange="activateButton(this)" required></td>
+        <td>I agree to the Terms & Conditions</td>
+  </tr>
+
+  <tr>
+    <td colspan="3"><input type="submit" id="submit" value="Submit"> <input type="reset" id="clear" value="Clear" onclick="disableSubmit()"></td>
+  </tr>
+</table>
+</form>
+<div id="result"></div>
+<script>
+    function disableSubmit() {
+    document.getElementById("submit").disabled = true;
+  }
+
+  function calculateBagTotal() {
+    var productCost = {
+      "TV": 30000,
+      "Refrigerator": 50000,
+      "Mobile": 20000
+    };
+    var quantity = parseInt(document.getElementById("quantity").value);
+    var selectedProduct = document.getElementById("product").value;
+    var selectedMode = document.getElementById("mode").value;
+    var bagTotal = productCost[selectedProduct] * quantity;
+
+    if (selectedMode === "2") { 
+      bagTotal -= (bagTotal * 0.05);
+    }
+
+    document.getElementById("bill").value = bagTotal;
+    calculateCoupon(bagTotal);
+  }
+
+  function calculateCoupon(bagTotal) {
+    var couponCode = "ADI";
+    if (bagTotal >= 100000) {
+      couponCode += bagTotal.toString().substring(0, 4);
+    } else {
+      couponCode += "0000";
+    }
+    document.getElementById("coupon").value = couponCode;
+  }
+
+  function activateButton(checkbox) {
+    document.getElementById("submit").disabled = !checkbox.checked;
+  }
+
+  function calculateFinalAmount() {
+    var bagTotal = parseFloat(document.getElementById("bill").value);
+    var couponCode = parseInt(document.getElementById("coupon").value.substring(3));
+    var deliveryCharge = 0;
+
+    if (document.getElementById("express").checked) {
+      deliveryCharge = 500;
+    }
+
+    var amountPayable = bagTotal - couponCode + deliveryCharge;
+
+    document.getElementById("result").innerHTML = "Dear " + document.getElementById("custname").value + ",<br>Your Final bill is Rs: " + amountPayable.toFixed(2) + "/-, Product will be delivered in next " + (deliveryCharge > 0 ? "24" : "72") + " hrs.<br>Invoice Copy is mailed on: " + document.getElementById("email").value;
+
+    return false;
+  }
+</script>
+         
+</body>
+
+</html>

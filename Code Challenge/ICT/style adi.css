@@ -1,0 +1,41 @@
+body {
+    background-color: #fffacd;
+  }
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #heading {
+    color: #FFFFFF;
+    font-family: Courier New;
+    background-color: #ffa07a;
+    text-align: center;
+  }
+  #Ebill {
+    font-family: Arial;
+    width: 300px;
+    background-color: #5f9ea0;
+    color: white;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  #Ebill td 
+  {
+    border: 2px solid #ddd;
+    padding: 8px;
+  }
+  #Ebill th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  #result {
+    font-family: Arial;
+    width: 300px;
+    background-color: #5f9ea0;
+    color: #770080;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    width:45%;
+  }
+  
