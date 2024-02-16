@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consonant Count</title>
+    <style>
+        label,input,button{
+            margin-top: 10px;
+        }
+        input{
+            border-color: lightgreen;
+        }
+        #countButton{
+            border: 2px solid black;
+            color:black;
+            background-color:rgb(76, 76, 207);
+            
+        }
+    </style>
+</head>
+<body>
+    <label for="inputText">Enter the text</label>
+    <br>
+
+    <input type="text" id="inputText">
+    <br>
+
+    <button id="countButton">OK</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("countButton").addEventListener("click", () => {
+                let inputText = document.getElementById("inputText").value.toLowerCase();
+                let consonants = inputText.replace(/[aeiou\W\d]/g, "").length;
+                if (consonants === 0) 
+                {
+                    alert("No Consonants");
+                } 
+                else 
+                {
+                    alert(`Number of consonants: ${consonants}`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

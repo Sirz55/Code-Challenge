@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>York Admission</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>York Admission</h3>
+    <form id="admissionForm" onsubmit="return display()">
+      <table>
+        <tr>
+          <td><label for="sname">Student Name</label></td>
+          <td><input type="text" id="sname" name="sname" pattern="[A-Za-z ]+" required placeholder="Enter the student name"></td>
+        </tr>
+        <tr>
+          <td><label for="phno">Phone Number</label></td>
+          <td><input type="tel" id="phno" name="phno" pattern="[7-9][0-9]{9}" required placeholder="Enter the phone number"></td>
+        </tr>
+        <tr>
+          <td><label for="aid">Admission Id</label></td>
+          <td><input type="text" id="aid" name="aid" required placeholder="Enter the admission id"></td>
+        </tr>
+        <tr>
+          <td><label for="admissiondate">Date of Admission</label></td>
+          <td><input type="date" id="admissiondate" name="admissiondate" required></td>
+        </tr>
+        <tr>
+          <td><label for="deptname">Department Name</label></td>
+          <td>
+            <select id="deptname" name="deptname" required>
+              <option value="">Select Department..</option>
+              <option value="EEE">EEE</option>
+              <option value="ECE">ECE</option>
+              <option value="CSE">CSE</option>
+              <option value="MECH">MECH</option>
+              <option value="CIVIL">CIVIL</option>
+              <option value="IT">IT</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Prefer College Hostel</td>
+          <td>
+            <label><input type="radio" name="preferHostel" id="yes" value="yes" required> Yes</label>
+            <label><input type="radio" name="preferHostel" id="no"  value="no" required> No</label>
+          </td>
+        </tr>
+        <tr>
+            <td><label for="First Graduate">First Graduate</label></td>
+            <td><label><input type="checkbox" id="firstGraduate" name="firstGraduate"> Click if you are first graduate</label>
+          </td>
+        </tr>
+      </table> <br>
+      <center><input type="submit" id="submit" value="CONFIRM ADMISSION";></center>
+    </form>
+    <br>
+    <div id="result"></div>
+    <script>
+      function display() {
+        var admissionFee = 0;
+        var tuitionFee = 0;
+        var hostelFee = 0;
+        var totalCollegeFee = 0;
+        
+        var deptname = document.getElementById('deptname').value;
+        var preferHostel = document.querySelector('input[name="preferHostel"]:checked').value;
+        var firstGraduate = document.getElementById('firstGraduate').checked;
+        
+        switch (deptname) {
+          case 'EEE':
+          case 'ECE':
+          case 'CSE':
+          case 'CIVIL':
+            admissionFee = 30000;
+            break;
+          case 'MECH':
+          case 'IT':
+            admissionFee = 30000;
+            break;
+        }
+        
+        switch (deptname) {
+          case 'EEE':
+            tuitionFee = 45000;
+            break;
+          case 'ECE':
+            tuitionFee = 50000;
+            break;
+          case 'CSE':
+          case 'CIVIL':
+          case 'IT':
+            tuitionFee = 45000;
+            break;
+          case 'MECH':
+            tuitionFee = 55000;
+            break;
+        }
+        
+        if (preferHostel === 'yes') {
+          hostelFee = 75000;
+        }
+        
+        totalCollegeFee = admissionFee + tuitionFee + hostelFee;
+        
+        if (firstGraduate) {
+          totalCollegeFee -= 20000;
+        }
+        
+        var studentName = document.getElementById('sname').value;
+        
+        var resultElement = document.getElementById('result');
+        resultElement.innerHTML = "Hi " + studentName + ",<br>";
+        resultElement.innerHTML += "Your Admission Fee is Rs. " + admissionFee + "<br>";
+        resultElement.innerHTML += "Tuition Fee is Rs. " + tuitionFee + "<br>";
+        resultElement.innerHTML += "Hostel Fee is Rs. " + hostelFee + "<br>";
+        resultElement.innerHTML += "Total College Fee is Rs. " + totalCollegeFee + "<br>";
+        
+        return false;
+      }
+    </script>
+    </body>
+    </html>
+   
